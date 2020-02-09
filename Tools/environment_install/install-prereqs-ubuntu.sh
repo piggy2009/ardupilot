@@ -102,7 +102,7 @@ elif [ "$UBUNTU_CODENAME" = "trusty" ]; then
     sudo add-apt-repository ppa:george-edison55/cmake-3.x -y
 fi
 
-sudo usermod -a -G dialout $USER
+#sudo usermod -a -G dialout $USER
 
 if dpkg-query -l "modemmanager"; then
     $APT_GET remove modemmanager
