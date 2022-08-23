@@ -3,10 +3,10 @@ echo "---------- $0 start ----------"
 set -e
 set -x
 
-#if [ $EUID == 0 ]; then
-#    echo "Please do not run this script as root; don't sudo it!"
-#    exit 1
-#fi
+if [ $EUID == 0 ]; then
+    echo "Please do not run this script as root; don't sudo it!"
+    exit 1
+fi
 
 OPT="/opt"
 RELEASE_CODENAME=$(lsb_release -c -s)
@@ -25,7 +25,7 @@ else
 fi
 
 BASE_PKGS="build-essential ccache g++ gawk git make wget"
-PYTHON_PKGS="future lxml pymavlink MAVProxy pexpect"
+PYTHON_PKGS="future lxml pymavlink==2.4.14 MAVProxy==1.8.50 pexpect"
 # add some Python packages required for commonly-used MAVProxy modules and hex file generation:
 PYTHON_PKGS="$PYTHON_PKGS pygame intelhex"
 PX4_PKGS="python-argparse openocd flex bison libncurses5-dev \
@@ -159,8 +159,8 @@ grep -Fxq "$exportline2" ~/.profile 2>/dev/null || {
 
 apt-cache search arm-none-eabi
 
-(
- cd $ARDUPILOT_ROOT
- git submodule update --init --recursive
-)
+#(
+# cd $ARDUPILOT_ROOT
+# git submodule update --init --recursive
+#)
 echo "---------- $0 end ----------"
